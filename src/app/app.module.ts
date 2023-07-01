@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {HttpClientModule} from "@angular/common/http";
+import { UserHomeComponent } from './user-home/user-home.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
     NavbarComponent,
     RegisterComponent,
     NotFoundComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,

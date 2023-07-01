@@ -5,6 +5,7 @@ import {catchError, of, throwError} from "rxjs";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {LoginUserDto} from "../models/login-user-dto";
 import {StorageService} from "../services/storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit{
 
   loginErrMsg = '';
 
-  constructor(private restAPI: RestApiService, private storageService: StorageService) {
+  constructor(private restAPI: RestApiService, private storageService: StorageService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit{
       .subscribe({
         next: (res: LoginUserDto) => {
           this.storageService.setLoginToken(res.token);
+          this.router.navigate(['userHome']);
         },
         error: (error: Error) => {
           // Handle the error here
