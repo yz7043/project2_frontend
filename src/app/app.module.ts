@@ -8,8 +8,10 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { UserHomeComponent } from './user-home/user-home.component';
+import {InterceptorService} from "./services/interceptor.service";
+import { DetailComponent } from './user-home/detail/detail.component';
 
 
 @NgModule({
@@ -20,15 +22,17 @@ import { UserHomeComponent } from './user-home/user-home.component';
     RegisterComponent,
     NotFoundComponent,
     UserHomeComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginUserDto} from "../models/login-user-dto";
+import {throwError} from "rxjs";
+import {UserOrderDTO} from "../models/user-order-dto";
+import {OrderDetailResponse} from "../models/order-item-detail-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +31,21 @@ export class RestApiService {
       password: password
     }
     return this.http.post<{message: string}>(this.baseURL+'/signup', body);
+  }
+
+  getUserOrders(){
+    return this.http.get<{orders: UserOrderDTO[]}>(this.baseURL+'/orders/all');
+  }
+
+  getUserOrderDetail(orderId: number) {
+    return this.http.get<OrderDetailResponse>(`${this.baseURL}/orders/${orderId}`)
+  }
+
+  cancelOrderById(orderId: number){
+    return this.http.patch<{message: string}>(`${this.baseURL}/orders/${orderId}/cancel`, null);
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(() => new Error(error.error.message));
   }
 }

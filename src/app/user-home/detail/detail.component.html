@@ -1,0 +1,35 @@
+<div class="popover-container" (click)="stopPropagation($event)">
+  <div class="popover bs-popover-right bs-popover-right-docs">
+    <div class="arrow"></div>
+    <h3 class="popover-header">Order Detail</h3>
+    <div class="popover-body">
+<!--      {{detailData | json}}-->
+      <div>
+        <h5>Date of Placement</h5>
+        {{detailData?.datePlaced}}
+      </div>
+      <div>
+        <h5>Order status</h5>
+        {{detailData?.orderStatus}}
+      </div>
+      <h5>Items</h5>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let orderItem of detailData?.orderItems">
+          <td>{{orderItem.product.name}}</td>
+          <td>{{orderItem.quantity}}</td>
+          <td><button class="btn btn-primary">Details</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="popover-footer">
+      <button class="btn btn-primary" (click)="close()">Close</button>
+      <button *ngIf="detailData?.orderStatus === 'PROCESSING'" class="btn btn-danger" (click)="cancelOrder()">Cancel</button>
+    </div>
+  </div>
+</div>

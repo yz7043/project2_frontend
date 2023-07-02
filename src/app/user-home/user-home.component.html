@@ -1,0 +1,28 @@
+<div class="container">
+  <div>
+    <h1>Orders</h1>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Order ID</th>
+        <th>Data Placed</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let order of orders">
+        <td>{{order.orderId}}</td>
+        <td>{{order.datePlaced}}</td>
+        <td>{{order.status}}</td>
+        <td><button (click)="getOrderDetail(order.orderId)" class="btn btn-primary">View</button></td>
+        <td><button (click)="cancelOrder(order.orderId)" class="btn btn-danger" [disabled]="order.status!=='PROCESSING'">Cancel</button></td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="showDetail" class="modal-backdrop show">
+    <app-detail (closeEvent)="hideDetail()" [show]="showDetail" [orderId]="currentOrderId"
+      (orderCancelled)="refreshData()"
+    ></app-detail>
+  </div>
+</div>

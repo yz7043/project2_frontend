@@ -41,8 +41,9 @@ export class LoginComponent implements OnInit{
       // .subscribe((res: LoginUserDto) => console.log(res));
       .subscribe({
         next: (res: LoginUserDto) => {
-          this.storageService.setLoginToken(res.token);
-          this.router.navigate(['userHome']);
+          this.storageService.setLoginToken(res.token, res.permission);
+          if(this.storageService.isUser())
+            this.router.navigate(['userHome']);
         },
         error: (error: Error) => {
           // Handle the error here
