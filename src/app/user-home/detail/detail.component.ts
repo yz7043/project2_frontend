@@ -21,7 +21,6 @@ export class DetailComponent implements OnChanges{
 
   ngOnChanges(){
     if(this.show){
-      // todo
       console.log(this.orderId);
       this.restAPI.getUserOrderDetail(this.orderId as number)
         .pipe(catchError(this.restAPI.handleError))
