@@ -3,7 +3,6 @@
     <div class="arrow"></div>
     <h3 class="popover-header">Order Detail</h3>
     <div class="popover-body">
-<!--      {{detailData | json}}-->
       <div>
         <h5>Date of Placement</h5>
         {{detailData?.datePlaced}}
@@ -22,7 +21,7 @@
         <tr *ngFor="let orderItem of detailData?.orderItems">
           <td>{{orderItem.product.name}}</td>
           <td>{{orderItem.quantity}}</td>
-          <td><button class="btn btn-primary">Details</button></td>
+          <td><button class="btn btn-primary" (click)="showProductDetail(orderItem)">Details</button></td>
         </tr>
       </table>
     </div>

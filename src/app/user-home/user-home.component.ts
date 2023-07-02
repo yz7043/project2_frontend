@@ -4,6 +4,8 @@ import {catchError} from "rxjs";
 import {UserOrderDTO} from "../models/user-order-dto";
 import {popNumber} from "rxjs/internal/util/args";
 import {Router} from "@angular/router";
+import {ProductDetailComponent} from "./product-detail/product-detail.component";
+import {OrderDetailResponse, OrderItemDetailDTO} from "../models/order-item-detail-dto";
 
 @Component({
   selector: 'app-user-home',
@@ -16,6 +18,10 @@ export class UserHomeComponent implements OnInit{
   showDetail = false;
 
   currentOrderId: number | null = null;
+
+  showProductDetail = false;
+  currentProduct: OrderItemDetailDTO | null = null;
+
   constructor(private restAPI: RestApiService, private router: Router) {
   }
   ngOnInit(): void {
@@ -54,5 +60,15 @@ export class UserHomeComponent implements OnInit{
           console.log(error);
         }
       });
+  }
+
+  hideProductDetail(){
+    this.showProductDetail = false;
+    this.currentProduct = null
+  }
+
+  displayProductDetail(product: OrderItemDetailDTO){
+    this.showProductDetail = true;
+    this.currentProduct = product;
   }
 }

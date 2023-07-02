@@ -1,0 +1,29 @@
+<div class="popover-container" (click)="stopPropagation($event)">
+  <div class="popover bs-popover-right bs-popover-right-docs">
+    <div class="arrow"></div>
+    <h3 class="popover-header">Product Detail</h3>
+    <div class="popover-body">
+      <div>
+        <h5>Product Name</h5>
+        {{product?.product?.name}}
+      </div>
+      <div>
+        <h5>Product Description</h5>
+        {{product?.product?.description}}
+      </div>
+      <div>
+        <h5>Purchased Price</h5>
+        {{product?.purchasedPrice}}
+      </div>
+      <div>
+        <h5>Purchased Quantity</h5>
+        {{product?.quantity}}
+      </div>
+    </div>
+
+    <div class="popover-footer">
+      <button class="btn btn-primary" (click)="closeProduct()">Close</button>
+    </div>
+  </div>
+</div>
+

@@ -21,8 +21,12 @@
     </table>
   </div>
   <div *ngIf="showDetail" class="modal-backdrop show">
-    <app-detail (closeEvent)="hideDetail()" [show]="showDetail" [orderId]="currentOrderId"
+    <app-detail (closeEvent)="hideDetail()" [show]="showDetail" [orderId]="currentOrderId" (showProduct)="displayProductDetail($event)"
       (orderCancelled)="refreshData()"
     ></app-detail>
+  </div>
+  <div *ngIf="showProductDetail" class="modal-backdrop show">
+    <app-product-detail (close)="hideProductDetail()" [product]="currentProduct" >
+    </app-product-detail>
   </div>
 </div>

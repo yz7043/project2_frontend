@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {OrderDetailResponse} from "../../models/order-item-detail-dto";
+import {OrderDetailResponse, OrderItemDetailDTO} from "../../models/order-item-detail-dto";
 import {RestApiService} from "../../services/rest-api.service";
 import {catchError} from "rxjs";
 import {Router} from "@angular/router";
@@ -14,6 +14,7 @@ export class DetailComponent implements OnChanges{
   @Output() closeEvent = new EventEmitter<void>();
   @Input() orderId: number | null = null;
   @Output() orderCancelled = new EventEmitter<void>();
+  @Output() showProduct = new EventEmitter<OrderItemDetailDTO>();
   detailData: OrderDetailResponse | null = null;
 
   constructor(private restAPI: RestApiService, private router: Router) {
@@ -59,5 +60,10 @@ export class DetailComponent implements OnChanges{
         })
     }
   }
-  showProductDetail(){}
+  showProductDetail(product: OrderItemDetailDTO){
+    if(!this.orderId)
+      return;
+    this.showProduct.emit(product);
+    this.close();
+  }
 }
