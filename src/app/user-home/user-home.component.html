@@ -20,6 +20,23 @@
       </tr>
     </table>
   </div>
+  <div>
+    <h1>Frequent Bought Products (Up to 3)</h1>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Frequency</th>
+      </tr>
+      <tr *ngFor="let freqProduct of frequentPurchased">
+        <th>{{freqProduct.name}}</th>
+        <th>{{freqProduct.description}}</th>
+        <th>{{freqProduct.frequency}}</th>
+      </tr>
+    </table>
+  </div>
   <div *ngIf="showDetail" class="modal-backdrop show">
     <app-detail (closeEvent)="hideDetail()" [show]="showDetail" [orderId]="currentOrderId" (showProduct)="displayProductDetail($event)"
       (orderCancelled)="refreshData()"

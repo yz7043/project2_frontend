@@ -4,6 +4,7 @@ import {LoginUserDto} from "../models/login-user-dto";
 import {throwError} from "rxjs";
 import {UserOrderDTO} from "../models/user-order-dto";
 import {OrderDetailResponse} from "../models/order-item-detail-dto";
+import {ProductFrequencyResponse} from "../models/product-frequency-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,10 @@ export class RestApiService {
 
   cancelOrderById(orderId: number){
     return this.http.patch<{message: string}>(`${this.baseURL}/orders/${orderId}/cancel`, null);
+  }
+
+  getUserFrequentResponse(limit: number){
+    return this.http.get<ProductFrequencyResponse>(`${this.baseURL}/products/frequent/${limit}`)
   }
 
   handleError(error: HttpErrorResponse) {
