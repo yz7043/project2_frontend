@@ -38,12 +38,13 @@ export class LoginComponent implements OnInit{
     }
     this.restAPI.postLogin(username, password)
       .pipe(catchError(this.handleError))
-      // .subscribe((res: LoginUserDto) => console.log(res));
       .subscribe({
         next: (res: LoginUserDto) => {
-          this.storageService.setLoginToken(res.token, res.permission);
+          this.storageService.setLoginToken(res.token);
           if(this.storageService.isUser())
             this.router.navigate(['userHome']);
+          else if(this.storageService.isSeller())
+            this.router.navigate(['adminHome']);
         },
         error: (error: Error) => {
           // Handle the error here

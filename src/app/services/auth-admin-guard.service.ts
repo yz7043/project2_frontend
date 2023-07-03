@@ -6,15 +6,15 @@ import {StorageService} from "./storage.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate{
+export class AuthAdminGuardService implements CanActivate {
 
   constructor(private storageService : StorageService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.storageService.isUser()){
-      alert("Please login first");
+    if(!this.storageService.isSeller()){
+      alert("You are not an admin")
       this.storageService.rmLoginToken();
-      this.router.navigate(['/login']);
+      this.router.navigate(['login']);
       return false;
     }
     return true;

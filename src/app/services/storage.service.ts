@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-
+import jwt_decode from 'jwt-decode';
+interface JwtAuth{
+  sub: string
+  permissions: { authority: string}[]
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -13,21 +17,33 @@ export class StorageService {
     return localStorage.getItem('token') !== null;
   }
 
-  setLoginToken(token: string, permission: string){
+  setLoginToken(token: string){
     localStorage.setItem('token', token);
-    localStorage.setItem('authority', permission);
   }
 
   rmLoginToken(){
     localStorage.removeItem('token');
-    localStorage.removeItem('authority');
   }
 
   isSeller(){
-    return localStorage.getItem('authority') === this.SELLER_AUTHORITY;
+    const resolvedToken = this.decodeJwt();
+    if(!resolvedToken)
+      return  false;
+    return  resolvedToken.permissions.find((auth) => auth.authority === this.SELLER_AUTHORITY) !== undefined;
   }
+
   isUser(){
-    return localStorage.getItem('authority') === this.USER_AUTHORITY;
+    const resolvedToken = this.decodeJwt();
+    if(!resolvedToken)
+      return  false;
+    return  resolvedToken.permissions.find((auth) => auth.authority === this.USER_AUTHORITY) !== undefined;
+  }
+
+  decodeJwt() {
+    const token = localStorage.getItem('token');
+    if(!token)
+      return null;
+    return jwt_decode(token) as JwtAuth;
   }
 
   getJwtToken(){

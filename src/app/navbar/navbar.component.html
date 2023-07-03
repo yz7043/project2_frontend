@@ -12,11 +12,20 @@
         <li class="nav-item" *ngIf="!storageService.isLogin()">
           <a class="nav-link" aria-current="page" routerLink="register" >Register</a>
         </li>
-        <li class="nav-item" *ngIf="storageService.isLogin()">
+        <li class="nav-item" *ngIf="storageService.isLogin() && storageService.isUser()">
           <button class="nav-link" aria-current="page" routerLink="userHome">Home</button>
         </li>
-        <li class="nav-item" *ngIf="storageService.isLogin()">
+        <li class="nav-item" *ngIf="storageService.isLogin() && storageService.isUser()">
           <button class="nav-link" aria-current="page" routerLink="userProduct">Product</button>
+        </li>
+        <li class="nav-item" *ngIf="storageService.isLogin() && storageService.isSeller()">
+          <button class="nav-link" aria-current="page" routerLink="adminHome">Home</button>
+        </li>
+        <li class="nav-item" *ngIf="storageService.isLogin() && storageService.isSeller()">
+          <button class="nav-link" aria-current="page" routerLink="adminProduct">Product</button>
+        </li>
+        <li class="nav-item" *ngIf="storageService.isLogin() && storageService.isSeller()">
+          <button class="nav-link" aria-current="page" routerLink="adminOrder">Order</button>
         </li>
         <li class="nav-item" *ngIf="storageService.isLogin()">
           <button class="nav-link" aria-current="page" (click)="logout()">Logout</button>

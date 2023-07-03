@@ -14,6 +14,9 @@ import {InterceptorService} from "./services/interceptor.service";
 import { DetailComponent } from './user-home/detail/detail.component';
 import { ProductDetailComponent } from './user-home/product-detail/product-detail.component';
 import { ProductComponent } from './product/product.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { AdminProductComponent } from './admin-product/admin-product.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { ProductComponent } from './product/product.component';
     DetailComponent,
     ProductDetailComponent,
     ProductComponent,
+    AdminHomeComponent,
+    AdminOrderComponent,
+    AdminProductComponent,
   ],
   imports: [
     BrowserModule,

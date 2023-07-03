@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {ProductDetailComponent} from "./product-detail/product-detail.component";
 import {OrderDetailResponse, OrderItemDetailDTO} from "../models/order-item-detail-dto";
 import {ProductFrequencyDTO} from "../models/product-frequency-dto";
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-user-home',
