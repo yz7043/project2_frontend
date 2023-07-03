@@ -9,6 +9,7 @@ import {WatchListResponse} from "../models/watch-list-item";
 import {InStockProductsResponse} from "../models/product-dto";
 import {StatusResponse} from "../models/status-response";
 import {OrderRequest} from "../models/order-dto";
+import {AdminAllOrderResponse} from "../models/admin-order-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,10 @@ export class RestApiService {
 
   placeOrder(orderRequest: OrderRequest){
     return this.http.post<StatusResponse>(`${this.baseURL}/orders`, orderRequest);
+  }
+
+  getAdminOrders(page=0){
+    return this.http.get<AdminAllOrderResponse>(`${this.baseURL}/orders/all?page=${page}`);
   }
 
   handleError(error: HttpErrorResponse) {

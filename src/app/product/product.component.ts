@@ -126,6 +126,7 @@ export class ProductComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.shopCart = [];
+          this.refreshProductData();
           alert("Place order successfully!");
         },
         error: (err) => {

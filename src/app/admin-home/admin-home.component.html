@@ -1,1 +1,32 @@
-<p>admin-home works!</p>
+<div class="container">
+  <div>
+    <h1>Orders</h1>
+  </div>
+  <div *ngIf="orders !== null">
+    <div>
+      <table>
+        <tr>
+          <th>Order ID</th>
+          <th>Date placed</th>
+          <th>Status</th>
+          <th>Username</th>
+          <th>User ID</th>
+        </tr>
+        <tr *ngFor="let order of orders?.orders">
+          <td>{{order.orderId}}</td>
+          <td>{{order.datePlaced}}</td>
+          <td>{{order.status}}</td>
+          <td>{{order.username}}</td>
+          <td>{{order.userId}}</td>
+        </tr>
+      </table>
+    </div>
+    <div >Current Page: {{orders.currentPage + 1}} / {{orders.totalPages}}</div>
+    <button class="btn btn-primary" style="margin-left: 5px; margin-right: 5px;" *ngIf="orders.currentPage > 0" (click)="prevPage()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <button class="btn btn-primary" style="margin-left: 5px; margin-right: 5px;" *ngIf="orders.currentPage+1 < orders.totalPages" (click)="nextPage()">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>

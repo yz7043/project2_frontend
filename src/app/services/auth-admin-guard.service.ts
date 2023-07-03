@@ -13,7 +13,6 @@ export class AuthAdminGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(!this.storageService.isSeller()){
       alert("You are not an admin")
-      this.storageService.rmLoginToken();
       this.router.navigate(['login']);
       return false;
     }
