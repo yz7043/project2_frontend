@@ -8,6 +8,7 @@ import {ProductFrequencyResponse} from "../models/product-frequency-dto";
 import {WatchListResponse} from "../models/watch-list-item";
 import {InStockProductsResponse} from "../models/product-dto";
 import {StatusResponse} from "../models/status-response";
+import {OrderRequest} from "../models/order-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,10 @@ export class RestApiService {
 
   getAllInStockProducts(){
     return this.http.get<InStockProductsResponse>(`${this.baseURL}/products/all`);
+  }
+
+  placeOrder(orderRequest: OrderRequest){
+    return this.http.post<StatusResponse>(`${this.baseURL}/orders`, orderRequest);
   }
 
   handleError(error: HttpErrorResponse) {

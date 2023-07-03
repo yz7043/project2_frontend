@@ -3,6 +3,7 @@ import {RestApiService} from "../services/rest-api.service";
 import {ProductDto} from "../models/product-dto";
 import {WatchListItem} from "../models/watch-list-item";
 import {catchError} from "rxjs";
+import {OrderRequest} from "../models/order-dto";
 
 
 interface CartItem{
@@ -35,7 +36,6 @@ export class ProductComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.inStockProducts = resp.products;
-          console.log(this.inStockProducts);
         },
         error: (err) => {
           console.log(err);
@@ -49,7 +49,6 @@ export class ProductComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.watchList = resp.products;
-          console.log(this.watchList)
         },
         error: (err) => {
           console.log(err);
@@ -114,5 +113,24 @@ export class ProductComponent implements OnInit {
           this.refreshWatchList();
         }
       })
+  }
+
+  placeOrder(){
+    let orderRequest: OrderRequest = {order: []};
+    this.shopCart.forEach(
+      (cartItem) => {
+        orderRequest.order.push({productId: cartItem.product.id, quantity: cartItem.quantity});
+      }
+    );
+    this.restAPI.placeOrder(orderRequest)
+      .subscribe({
+        next: (resp) => {
+          this.shopCart = [];
+          alert("Place order successfully!");
+        },
+        error: (err) => {
+          alert(err.error.message);
+        }
+      });
   }
 }
