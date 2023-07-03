@@ -5,6 +5,9 @@ import {throwError} from "rxjs";
 import {UserOrderDTO} from "../models/user-order-dto";
 import {OrderDetailResponse} from "../models/order-item-detail-dto";
 import {ProductFrequencyResponse} from "../models/product-frequency-dto";
+import {WatchListResponse} from "../models/watch-list-item";
+import {InStockProductsResponse} from "../models/product-dto";
+import {StatusResponse} from "../models/status-response";
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +42,7 @@ export class RestApiService {
   }
 
   getUserOrderDetail(orderId: number) {
-    return this.http.get<OrderDetailResponse>(`${this.baseURL}/orders/${orderId}`)
+    return this.http.get<OrderDetailResponse>(`${this.baseURL}/orders/${orderId}`);
   }
 
   cancelOrderById(orderId: number){
@@ -47,7 +50,23 @@ export class RestApiService {
   }
 
   getUserFrequentResponse(limit: number){
-    return this.http.get<ProductFrequencyResponse>(`${this.baseURL}/products/frequent/${limit}`)
+    return this.http.get<ProductFrequencyResponse>(`${this.baseURL}/products/frequent/${limit}`);
+  }
+
+  getWatchList(){
+    return this.http.get<WatchListResponse>(`${this.baseURL}/watchlist/products/all`);
+  }
+
+  removeFromWatchList(id: number) {
+    return this.http.delete<StatusResponse>(`${this.baseURL}/watchlist/product/${id}`);
+  }
+
+  addToWatchList(id: number){
+    return this.http.post<StatusResponse>(`${this.baseURL}/watchlist/product/${id}`, null);
+  }
+
+  getAllInStockProducts(){
+    return this.http.get<InStockProductsResponse>(`${this.baseURL}/products/all`);
   }
 
   handleError(error: HttpErrorResponse) {

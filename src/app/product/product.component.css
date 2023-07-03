@@ -11,11 +11,3 @@ th, td {
   padding: 15px; /* optional: adds some padding inside the cells */
   text-align: left; /* optional: left-aligns the text in cells */
 }
-
-.app-detail, .app-product-detail {
-  background-color: white; /* Or any color you prefer */
-}
-.modal-backdrop.show {
-  background-color: rgba(0, 0, 0, 1); /* You can change the last parameter (0.5) to 1 for full opacity */
-}
-

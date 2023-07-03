@@ -1,0 +1,84 @@
+<div class="container">
+  <div>
+    <h1>
+      All Orders
+    </h1>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th> <!--add to shop card-->
+        <th></th> <!--add to watch list-->
+      </tr>
+      <tr *ngFor="let product of inStockProducts">
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.retailPrice}}</td>
+        <td><button class="btn btn-primary" *ngIf="!isInShopCard(product.id)" (click)="addToShopCart(product)">Add to Cart</button></td>
+        <td><button class="btn btn-primary" *ngIf="!isInWatchList(product.id)" (click)="addToWatchList(product)">Add to WatchList</button></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <h1>
+      Watch List
+    </h1>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th> <!--remove from watch list-->
+      </tr>
+      <tr *ngFor="let product of watchList">
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.retailPrice}}</td>
+        <td><button class="btn btn-danger" (click)="removeFromWatchList(product)"><i class="bi bi-dash"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <div>
+      <h1>Shop Cart</h1>
+    </div>
+    <div>
+      Total Price: {{getShopCardTotalPrice()}}
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Retail Price</th>
+          <th>Total Price</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let cartItem of shopCart; let curIdx=index">
+          <td>{{cartItem.product.name}}</td>
+          <td>{{cartItem.product.description}}</td>
+          <td>{{cartItem.quantity}}</td>
+          <td>{{cartItem.product.retailPrice}}</td>
+          <td>{{cartItem.product.retailPrice * cartItem.quantity}}</td>
+          <td>
+            <button class="btn btn-primary" style="margin-right: 5px" (click)="addCartItemNumber(curIdx)"><i class="bi bi-plus"></i></button>
+            <button class="btn btn-primary"><i class="bi bi-dash" (click)="decreaseCartItemNumber(curIdx)"></i></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div style="margin-top: 5px">
+      <button class="btn btn-primary" [disabled]="shopCart.length === 0">Place Order</button>
+    </div>
+  </div>
+</div>

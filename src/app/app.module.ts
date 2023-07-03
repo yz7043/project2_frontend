@@ -13,6 +13,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import {InterceptorService} from "./services/interceptor.service";
 import { DetailComponent } from './user-home/detail/detail.component';
 import { ProductDetailComponent } from './user-home/product-detail/product-detail.component';
+import { ProductComponent } from './product/product.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProductDetailComponent } from './user-home/product-detail/product-detai
     UserHomeComponent,
     DetailComponent,
     ProductDetailComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
