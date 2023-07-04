@@ -122,6 +122,11 @@ export class RestApiService {
     return this.http.patch<StatusResponse>(`${this.baseURL}/products/${id}`, product);
   }
 
+  adminAddProduct(product: AdminProductModifyRequest){
+    return this.http.post<StatusResponse>(`${this.baseURL}/products`, product);
+  }
+
+
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.error.message));
   }

@@ -4,6 +4,7 @@ import {catchError} from "rxjs";
 import {AdminProductDTO, AdminProductModifyRequest} from "../models/product-dto";
 import {FormBuilder, FormControl, ValidationErrors, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {add} from "ngx-bootstrap/chronos";
 
 @Component({
   selector: 'app-admin-product',
@@ -106,8 +107,9 @@ export class AdminProductComponent implements OnInit{
     this.router.navigate(['adminProductDetail'], {queryParams: {id: id}});
   }
   addProduct(){
-
+    this.router.navigate(['adminAddProduct']);
   }
 
   protected readonly visualViewport = visualViewport;
+  protected readonly add = add;
 }

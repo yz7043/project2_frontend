@@ -1,1 +1,40 @@
-<p>admin-add-product works!</p>
+<div class="container">
+  <p>Add Product</p>
+  <div>
+    <form [formGroup]="productForm" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+               formControlName="name"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp"
+               formControlName="description"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputRetailPrice" class="form-label">Retail Price</label>
+        <input type="number" class="form-control" id="exampleInputRetailPrice" aria-describedby="emailHelp"
+               formControlName="retailPrice"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputWholesalePrice" class="form-label">Whole Price</label>
+        <input type="number" class="form-control" id="exampleInputWholesalePrice" aria-describedby="emailHelp"
+               formControlName="wholesalePrice"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputQuantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="exampleInputQuantity" aria-describedby="emailHelp"
+               formControlName="quantity"
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <button (click)="cancelAdd()" class="btn btn-danger" style="margin-top: 2px">Cancel</button>
+  </div>
+</div>
+
