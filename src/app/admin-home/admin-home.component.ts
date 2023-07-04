@@ -1,8 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {RestApiService} from "../services/rest-api.service";
 import {AdminAllOrderResponse, AdminOrderDto} from "../models/admin-order-dto";
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {catchError} from "rxjs";
+import {AdminOrderDetailResponse} from "../models/order-item-detail-dto";
 
 @Component({
   selector: 'app-admin-home',
@@ -11,7 +11,10 @@ import {catchError} from "rxjs";
 })
 export class AdminHomeComponent implements OnInit{
   orders: AdminAllOrderResponse | null = null;
-  constructor(private restAPI: RestApiService, private modalService: BsModalService) {
+  isShowDetail: boolean = false;
+  curOrder: AdminOrderDetailResponse | null = null;
+
+  constructor(private restAPI: RestApiService) {
   }
 
   ngOnInit(): void {
@@ -36,13 +39,33 @@ export class AdminHomeComponent implements OnInit{
 
   }
 
+  detailOpen(id: number){
+    this.restAPI.getAdminOrderDetail(id)
+      .pipe(catchError(this.restAPI.handleError))
+      .subscribe({
+        next: (resp) =>{
+          this.isShowDetail = true;
+          this.curOrder = resp;
+          console.log(resp)
+        },
+        error: (err) => {
+          alert(err.error.message)
+        }
+      })
+  }
+
+  detailClose() {
+    this.curOrder = null;
+    this.isShowDetail = false;
+  }
+
   nextPage(){
     if(this.orders && this.orders.currentPage + 1 < this.orders.totalPages)
-      this.refreshAllOrders(this.orders.currentPage + 1)
+      this.refreshData(this.orders.currentPage + 1)
   }
   prevPage(){
     if(this.orders && this.orders.currentPage > 0){
-      this.refreshAllOrders(this.orders.currentPage - 1);
+      this.refreshData(this.orders.currentPage - 1);
     }
   }
 

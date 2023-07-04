@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginUserDto} from "../models/login-user-dto";
 import {throwError} from "rxjs";
 import {UserOrderDTO} from "../models/user-order-dto";
-import {OrderDetailResponse} from "../models/order-item-detail-dto";
+import {AdminOrderDetailResponse, OrderDetailResponse} from "../models/order-item-detail-dto";
 import {ProductFrequencyResponse} from "../models/product-frequency-dto";
 import {WatchListResponse} from "../models/watch-list-item";
 import {InStockProductsResponse} from "../models/product-dto";
@@ -85,6 +85,10 @@ export class RestApiService {
 
   adminCompleteOrder(orderId: number) {
     return this.http.patch<StatusResponse>(`${this.baseURL}/orders/${orderId}/complete`, null);
+  }
+
+  getAdminOrderDetail(orderId: number) {
+    return this.http.get<AdminOrderDetailResponse>(`${this.baseURL}/orders/${orderId}`);
   }
 
   handleError(error: HttpErrorResponse) {
