@@ -2,7 +2,7 @@ export interface ProductDto {
   id: number,
   description: string,
   name: string,
-  quantity: number | null,
+  quantity: number,
   retailPrice: number
 }
 
