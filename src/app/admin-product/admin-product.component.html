@@ -23,6 +23,9 @@
         <td><button class="btn btn-primary" (click)="showDetail(product.id)">View</button></td>
       </tr>
     </table>
+    <div style="margin-top: 5px">
+      <button class="btn btn-primary" (click)="addProduct()">Add Product</button>
+    </div>
   </div>
   <div *ngIf="isShowEdit">
     <form [formGroup]="editProductForm" (ngSubmit)="submitEdit()">
@@ -60,7 +63,5 @@
     </form>
     <button (click)="cancelEdit()" class="btn btn-danger" style="margin-top: 2px">Cancel</button>
   </div>
-  <div style="margin-top: 5px">
-    <button class="btn btn-primary" (click)="addProduct()">Add Product</button>
-  </div>
+
 </div>
