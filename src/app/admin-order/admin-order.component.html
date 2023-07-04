@@ -1,1 +1,74 @@
-<p>admin-order works!</p>
+<div class="container" *ngIf="!isShowDetail">
+  <div>
+    <h1>Orders</h1>
+  </div>
+  <div *ngIf="orders !== null">
+    <div>
+      <table>
+        <tr>
+          <th>Order ID</th>
+          <th>Date placed</th>
+          <th>Status</th>
+          <th>Username</th>
+          <th>User ID</th>
+          <th>Options</th>
+          <th>Details</th>
+        </tr>
+        <tr *ngFor="let order of orders.orders">
+          <td>{{order.orderId}}</td>
+          <td>{{order.datePlaced}}</td>
+          <td>{{order.status}}</td>
+          <td>{{order.username}}</td>
+          <td>{{order.userId}}</td>
+          <td>
+            <p *ngIf="order.status !== 'PROCESSING'">N/A</p>
+            <button *ngIf="order.status === 'PROCESSING'" class="btn btn-primary" (click)="completeOrder(order.orderId)">Complete</button>
+            <button *ngIf="order.status === 'PROCESSING'" class="btn btn-danger" (click)="cancelOrder(order.orderId)">Cancel</button>
+          </td>
+          <td><button class="btn btn-primary" (click)="detailOpen(order.orderId)">Details</button></td>
+        </tr>
+      </table>
+    </div>
+    <div >Current Page: {{orders.currentPage + 1}} / {{orders.totalPages}}</div>
+    <button class="btn btn-primary" style="margin-left: 5px; margin-right: 5px;" *ngIf="orders.currentPage > 0" (click)="prevPage()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <button class="btn btn-primary" style="margin-left: 5px; margin-right: 5px;" *ngIf="orders.currentPage+1 < orders.totalPages" (click)="nextPage()">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>
+<div class="container" *ngIf="isShowDetail">
+  <div>
+    <h1>Order Id</h1>
+    <p>{{curOrder?.id}}</p>
+    <h1>Place Time</h1>
+    <p>{{curOrder?.datePlaced}}</p>
+    <h1>Order Status</h1>
+    <p>{{curOrder?.orderStatus}}</p>
+    <h1>Order Item Details</h1>
+    <table>
+      <tr>
+        <th>Purchased Price</th>
+        <th>Purchased Wholesale Price</th>
+        <th>Quantity</th>
+        <th>Item Name</th>
+        <th>Item Description</th>
+        <th>Current Retail Price</th>
+        <th>Current Wholesale Price</th>
+      </tr>
+      <tr *ngFor="let orderItem of curOrder?.orderItems">
+        <td>{{orderItem.purchasedPrice}}</td>
+        <td>{{orderItem.wholesalePrice}}</td>
+        <td>{{orderItem.quantity}}</td>
+        <td>{{orderItem.product.name}}</td>
+        <td>{{orderItem.product.description}}</td>
+        <td>{{orderItem.product.retailPrice}}</td>
+        <td>{{orderItem.product.wholesalePrice}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <button (click)="detailClose()" class="btn btn-danger">Close</button>
+  </div>
+</div>
