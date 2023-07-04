@@ -4,6 +4,7 @@ import {ProductDto} from "../models/product-dto";
 import {WatchListItem} from "../models/watch-list-item";
 import {catchError} from "rxjs";
 import {OrderRequest} from "../models/order-dto";
+import {Router} from "@angular/router";
 
 
 interface CartItem{
@@ -21,7 +22,7 @@ export class ProductComponent implements OnInit {
   watchList: WatchListItem[] = [];
   shopCart: CartItem[] = [];
 
-  constructor(private restAPI: RestApiService) {
+  constructor(private restAPI: RestApiService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -133,5 +134,9 @@ export class ProductComponent implements OnInit {
           alert(err.error.message);
         }
       });
+  }
+
+  showDetail(id: number){
+    this.router.navigate(['userProductDetail'], {queryParams: {id: id}})
   }
 }

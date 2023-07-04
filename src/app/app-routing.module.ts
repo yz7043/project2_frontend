@@ -13,6 +13,7 @@ import {AdminOrderComponent} from "./admin-order/admin-order.component";
 import {AdminAddProductComponent} from "./admin-add-product/admin-add-product.component";
 import {ProductDetailComponent} from "./user-home/product-detail/product-detail.component";
 import {AdminProductDetailComponent} from "./admin-product-detail/admin-product-detail.component";
+import {UserProductDetailComponent} from "./user-product-detail/user-product-detail.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'userHome', component: UserHomeComponent, canActivate: [AuthGuardService]},
   { path: 'userProduct', component: ProductComponent, canActivate: [AuthGuardService]},
+  { path: 'userProductDetail', component: UserProductDetailComponent, canActivate: [AuthGuardService]},
   { path: 'adminHome', component: AdminHomeComponent, canActivate: [AuthAdminGuardService]},
   { path: 'adminProduct', component: AdminProductComponent, canActivate: [AuthAdminGuardService]},
   { path: 'adminOrder', component: AdminOrderComponent, canActivate: [AuthAdminGuardService]},

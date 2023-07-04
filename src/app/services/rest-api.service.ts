@@ -10,7 +10,7 @@ import {
   AdminProductDTO,
   AdminProductModifyRequest,
   AdminProductsResponse,
-  InStockProductsResponse
+  InStockProductsResponse, ProductDto
 } from "../models/product-dto";
 import {StatusResponse} from "../models/status-response";
 import {OrderRequest} from "../models/order-dto";
@@ -75,6 +75,10 @@ export class RestApiService {
 
   getAllInStockProducts(){
     return this.http.get<InStockProductsResponse>(`${this.baseURL}/products/all`);
+  }
+
+  getUserProductDetail(id: number){
+    return this.http.get<ProductDto>(`${this.baseURL}/products/${id}`);
   }
 
   placeOrder(orderRequest: OrderRequest){

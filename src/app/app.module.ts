@@ -23,6 +23,7 @@ import { ItemsMostProfitComponent } from './admin-home/items-most-profit/items-m
 import { ItemsMostPopularComponent } from './admin-home/items-most-popular/items-most-popular.component';
 import { AdminAddProductComponent } from './admin-add-product/admin-add-product.component';
 import { AdminProductDetailComponent } from './admin-product-detail/admin-product-detail.component';
+import { UserProductDetailComponent } from './user-product-detail/user-product-detail.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AdminProductDetailComponent } from './admin-product-detail/admin-produc
     ItemsMostPopularComponent,
     AdminAddProductComponent,
     AdminProductDetailComponent,
+    UserProductDetailComponent,
   ],
   imports: [
     BrowserModule,

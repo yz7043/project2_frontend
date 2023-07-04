@@ -13,6 +13,7 @@
         <th>Price</th>
         <th></th> <!--add to shop card-->
         <th></th> <!--add to watch list-->
+        <th></th>
       </tr>
       <tr *ngFor="let product of inStockProducts">
         <td>{{product.name}}</td>
@@ -21,6 +22,9 @@
         <td>{{product.retailPrice}}</td>
         <td><button class="btn btn-primary" *ngIf="!isInShopCard(product.id)" (click)="addToShopCart(product)">Add to Cart</button></td>
         <td><button class="btn btn-primary" *ngIf="!isInWatchList(product.id)" (click)="addToWatchList(product)">Add to WatchList</button></td>
+        <td>
+          <button class="btn btn-primary" (click)="showDetail(product.id)">Details</button>
+        </td>
       </tr>
     </table>
   </div>
