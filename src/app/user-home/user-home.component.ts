@@ -8,6 +8,7 @@ import {ProductDetailComponent} from "./product-detail/product-detail.component"
 import {OrderDetailResponse, OrderItemDetailDTO} from "../models/order-item-detail-dto";
 import {ProductFrequencyDTO} from "../models/product-frequency-dto";
 import jwt_decode from "jwt-decode";
+import {UserRecentProductDto} from "../models/stats/user-recent-product-dto";
 
 @Component({
   selector: 'app-user-home',
@@ -26,6 +27,9 @@ export class UserHomeComponent implements OnInit{
   currentProduct: OrderItemDetailDTO | null = null;
 
   frequentPurchased: ProductFrequencyDTO[] | null = null;
+
+  recentProducts: UserRecentProductDto[] = []
+
 
   constructor(private restAPI: RestApiService, private router: Router) {
   }
@@ -69,11 +73,20 @@ export class UserHomeComponent implements OnInit{
       .pipe(catchError(this.restAPI.handleError))
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.frequentPurchased = res.frequentProducts;
         },
         error: (error: Error) => {
           console.log(error);
+        }
+      });
+    this.restAPI.getUserRecentResponse(3)
+      .pipe(catchError(this.restAPI.handleError))
+      .subscribe({
+        next: (resp) => {
+          this.recentProducts = resp.recentProducts;
+        },
+        error: (err) => {
+          console.log(err.error.message);
         }
       })
   }

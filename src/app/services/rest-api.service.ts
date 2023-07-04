@@ -16,6 +16,7 @@ import {StatusResponse} from "../models/status-response";
 import {OrderRequest} from "../models/order-dto";
 import {AdminAllOrderResponse} from "../models/admin-order-dto";
 import {ProfitableItemResponse, SoldItemResponse} from "../models/stats/sold-item";
+import {UserRecentProductResponse} from "../models/stats/user-recent-product-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,10 @@ export class RestApiService {
 
   getUserFrequentResponse(limit: number){
     return this.http.get<ProductFrequencyResponse>(`${this.baseURL}/products/frequent/${limit}`);
+  }
+
+  getUserRecentResponse(limit: 3){
+    return this.http.get<UserRecentProductResponse>(`${this.baseURL}/products/recent/${limit}`);
   }
 
   getWatchList(){

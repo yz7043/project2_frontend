@@ -38,6 +38,23 @@
         </tr>
       </table>
     </div>
+    <div>
+      <h1>Most Recent Bought Products (Up to 3)</h1>
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+        <tr *ngFor="let recentProduct of recentProducts">
+          <td>{{recentProduct.name}}</td>
+          <td>{{recentProduct.description}}</td>
+          <td>{{recentProduct.datePurchased}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div *ngIf="showDetail" class="modal-backdrop show">
     <app-detail (closeEvent)="hideDetail()" [show]="showDetail" [orderId]="currentOrderId" (showProduct)="displayProductDetail($event)"
