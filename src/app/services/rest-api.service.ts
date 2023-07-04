@@ -79,6 +79,14 @@ export class RestApiService {
     return this.http.get<AdminAllOrderResponse>(`${this.baseURL}/orders/all?page=${page}`);
   }
 
+  adminCancelOrder(orderId: number){
+    return this.http.patch<StatusResponse>(`${this.baseURL}/orders/${orderId}/cancel`, null);
+  }
+
+  adminCompleteOrder(orderId: number) {
+    return this.http.patch<StatusResponse>(`${this.baseURL}/orders/${orderId}/complete`, null);
+  }
+
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.error.message));
   }
