@@ -6,7 +6,12 @@ import {UserOrderDTO} from "../models/user-order-dto";
 import {AdminOrderDetailResponse, OrderDetailResponse} from "../models/order-item-detail-dto";
 import {ProductFrequencyResponse} from "../models/product-frequency-dto";
 import {WatchListResponse} from "../models/watch-list-item";
-import {InStockProductsResponse} from "../models/product-dto";
+import {
+  AdminProductDTO,
+  AdminProductModifyRequest,
+  AdminProductsResponse,
+  InStockProductsResponse
+} from "../models/product-dto";
 import {StatusResponse} from "../models/status-response";
 import {OrderRequest} from "../models/order-dto";
 import {AdminAllOrderResponse} from "../models/admin-order-dto";
@@ -103,6 +108,18 @@ export class RestApiService {
 
   getStatsProfitableItems(limit: number = 3){
     return this.http.get<ProfitableItemResponse>(`${this.baseURL}/products/profit/${limit}`);
+  }
+
+  getAdminAllProducts(){
+    return this.http.get<AdminProductsResponse>(`${this.baseURL}/products/all`);
+  }
+
+  getAdminProductById(id: number){
+    return this.http.get<AdminProductDTO>(`${this.baseURL}/products/${id}`);
+  }
+
+  adminModifyProduct(product: AdminProductModifyRequest, id: number){
+    return this.http.patch<StatusResponse>(`${this.baseURL}/products/${id}`, product);
   }
 
   handleError(error: HttpErrorResponse) {

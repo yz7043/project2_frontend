@@ -1,1 +1,61 @@
-<p>admin-product works!</p>
+<div class="container">
+  <div *ngIf="!isShowEdit">
+    <h1>All Products</h1>
+    <table>
+      <tr>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Retail Price</th>
+        <th>Wholesale Price</th>
+        <th>Edit</th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.retailPrice}}</td>
+        <td>{{product.wholesalePrice}}</td>
+        <td><button class="btn btn-primary" (click)="showEdit(product)">Edit</button></td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isShowEdit">
+    <form [formGroup]="editProductForm" (ngSubmit)="submitEdit()">
+      <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+               formControlName="name"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp"
+               formControlName="description"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputRetailPrice" class="form-label">Retail Price</label>
+        <input type="number" class="form-control" id="exampleInputRetailPrice" aria-describedby="emailHelp"
+               formControlName="retailPrice"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputWholesalePrice" class="form-label">Whole Price</label>
+        <input type="number" class="form-control" id="exampleInputWholesalePrice" aria-describedby="emailHelp"
+               formControlName="wholesalePrice"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputQuantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="exampleInputQuantity" aria-describedby="emailHelp"
+               formControlName="quantity"
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <button (click)="cancelEdit()" class="btn btn-danger" style="margin-top: 2px">Cancel</button>
+  </div>
+</div>

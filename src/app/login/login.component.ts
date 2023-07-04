@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if(this.storageService.isSeller()){
+      this.router.navigate(['adminHome'])
+    }else if(this.storageService.isUser()){
+      this.router.navigate(['userHome']);
+    }
 
   }
 
