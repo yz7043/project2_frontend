@@ -10,6 +10,9 @@ import {AdminHomeComponent} from "./admin-home/admin-home.component";
 import {AuthAdminGuardService} from "./services/auth-admin-guard.service";
 import {AdminProductComponent} from "./admin-product/admin-product.component";
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
+import {AdminAddProductComponent} from "./admin-add-product/admin-add-product.component";
+import {ProductDetailComponent} from "./user-home/product-detail/product-detail.component";
+import {AdminProductDetailComponent} from "./admin-product-detail/admin-product-detail.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -20,6 +23,8 @@ const routes: Routes = [
   { path: 'adminHome', component: AdminHomeComponent, canActivate: [AuthAdminGuardService]},
   { path: 'adminProduct', component: AdminProductComponent, canActivate: [AuthAdminGuardService]},
   { path: 'adminOrder', component: AdminOrderComponent, canActivate: [AuthAdminGuardService]},
+  { path: 'adminAddProduct', component: AdminAddProductComponent, canActivate: [AuthAdminGuardService]},
+  { path: 'adminProductDetail', component: AdminProductDetailComponent, canActivate: [AuthAdminGuardService]},
 
   { path: '**', component: NotFoundComponent}
 ];

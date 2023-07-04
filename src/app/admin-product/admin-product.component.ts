@@ -3,6 +3,7 @@ import {RestApiService} from "../services/rest-api.service";
 import {catchError} from "rxjs";
 import {AdminProductDTO, AdminProductModifyRequest} from "../models/product-dto";
 import {FormBuilder, FormControl, ValidationErrors, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-product',
@@ -23,7 +24,7 @@ export class AdminProductComponent implements OnInit{
 
   isShowEdit = false
 
-  constructor(private restAPI: RestApiService) {
+  constructor(private restAPI: RestApiService, private router: Router) {
   }
   ngOnInit(): void {
     this.refreshData();
@@ -99,6 +100,14 @@ export class AdminProductComponent implements OnInit{
           alert(err.error.message);
         }
       })
+  }
+
+  showDetail(id: number){
+    this.router.navigate(['adminProductDetail'], {queryParams: {id: id}});
+  }
+  addProduct(){
 
   }
+
+  protected readonly visualViewport = visualViewport;
 }
