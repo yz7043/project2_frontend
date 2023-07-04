@@ -10,6 +10,7 @@ import {InStockProductsResponse} from "../models/product-dto";
 import {StatusResponse} from "../models/status-response";
 import {OrderRequest} from "../models/order-dto";
 import {AdminAllOrderResponse} from "../models/admin-order-dto";
+import {ProfitableItemResponse, SoldItemResponse} from "../models/stats/sold-item";
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +90,19 @@ export class RestApiService {
 
   getAdminOrderDetail(orderId: number) {
     return this.http.get<AdminOrderDetailResponse>(`${this.baseURL}/orders/${orderId}`);
+  }
+
+  // stats request
+  getAllSoldItems(){
+    return this.http.get<SoldItemResponse>(`${this.baseURL}/products/items`);
+  }
+
+  getStatsPopularItems(limit: number = 3){
+    return this.http.get<SoldItemResponse>(`${this.baseURL}/products/popular/${limit}`);
+  }
+
+  getStatsProfitableItems(limit: number = 3){
+    return this.http.get<ProfitableItemResponse>(`${this.baseURL}/products/profit/${limit}`);
   }
 
   handleError(error: HttpErrorResponse) {

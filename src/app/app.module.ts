@@ -18,6 +18,9 @@ import { ProductComponent } from './product/product.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { AdminProductComponent } from './admin-product/admin-product.component';
+import { AllSoldItemComponent } from './admin-home/all-sold-item/all-sold-item.component';
+import { ItemsMostProfitComponent } from './admin-home/items-most-profit/items-most-profit.component';
+import { ItemsMostPopularComponent } from './admin-home/items-most-popular/items-most-popular.component';
 
 
 @NgModule({
@@ -34,6 +37,9 @@ import { AdminProductComponent } from './admin-product/admin-product.component';
     AdminHomeComponent,
     AdminOrderComponent,
     AdminProductComponent,
+    AllSoldItemComponent,
+    ItemsMostProfitComponent,
+    ItemsMostPopularComponent,
   ],
   imports: [
     BrowserModule,

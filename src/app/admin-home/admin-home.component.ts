@@ -1,8 +1,9 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, TemplateRef} from '@angular/core';
 import {RestApiService} from "../services/rest-api.service";
 import {AdminAllOrderResponse, AdminOrderDto} from "../models/admin-order-dto";
 import {catchError} from "rxjs";
 import {AdminOrderDetailResponse} from "../models/order-item-detail-dto";
+import {RefreshChildService} from "../services/refresh-child.service";
 
 @Component({
   selector: 'app-admin-home',
@@ -14,15 +15,16 @@ export class AdminHomeComponent implements OnInit{
   isShowDetail: boolean = false;
   curOrder: AdminOrderDetailResponse | null = null;
 
-  constructor(private restAPI: RestApiService) {
+  constructor(private restAPI: RestApiService, private refreshChildService: RefreshChildService) {
   }
 
   ngOnInit(): void {
-    this.refreshAllOrders(0);
+    this.refreshData(0);
   }
 
   refreshData(page = 0){
     this.refreshAllOrders(page);
+    this.refreshChildService.refreshChildren$.next();
   }
 
   refreshAllOrders(page = 0){
@@ -35,8 +37,7 @@ export class AdminHomeComponent implements OnInit{
         error: (err) => {
           alert(err.error.message);
         }
-      })
-
+      });
   }
 
   detailOpen(id: number){
@@ -75,7 +76,7 @@ export class AdminHomeComponent implements OnInit{
       .subscribe({
         next: (resp) => {
           alert(`Order ${id} cancelled!`);
-          this.refreshAllOrders(this.orders ? this.orders.currentPage : 0);
+          this.refreshData(this.orders ? this.orders.currentPage : 0);
         },
         error: (err) => {
           alert(err.error.message);
@@ -89,7 +90,7 @@ export class AdminHomeComponent implements OnInit{
       .subscribe({
         next: (resp) => {
           alert(`Order ${id} completed!`);
-          this.refreshAllOrders(this.orders ? this.orders.currentPage : 0);
+          this.refreshData(this.orders ? this.orders.currentPage : 0);
         },
         error: (err) => {
           alert(err.error.message);

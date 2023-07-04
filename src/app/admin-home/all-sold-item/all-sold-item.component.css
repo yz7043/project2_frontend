@@ -1,0 +1,13 @@
+table {
+  border-collapse: collapse; /* ensures that borders don't double up in between cells */
+  width: 100%; /* optional: change to suit your layout */
+}
+
+table, th, td {
+  border: 1px solid black; /* sets a black border around the table and the cells */
+}
+
+th, td {
+  padding: 15px; /* optional: adds some padding inside the cells */
+  text-align: left; /* optional: left-aligns the text in cells */
+}
