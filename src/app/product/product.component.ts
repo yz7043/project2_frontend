@@ -5,6 +5,7 @@ import {WatchListItem} from "../models/watch-list-item";
 import {catchError} from "rxjs";
 import {OrderRequest} from "../models/order-dto";
 import {Router} from "@angular/router";
+import {StorageService} from "../services/storage.service";
 
 
 interface CartItem{
@@ -21,8 +22,9 @@ export class ProductComponent implements OnInit {
   inStockProducts : ProductDto[] = [];
   watchList: WatchListItem[] = [];
   shopCart: CartItem[] = [];
+  readonly SHOP_CART_KEY = "SHOP_CART";
 
-  constructor(private restAPI: RestApiService, private router: Router) {
+  constructor(private restAPI: RestApiService, private router: Router, private storage: StorageService) {
   }
 
   ngOnInit(): void {
@@ -58,7 +60,12 @@ export class ProductComponent implements OnInit {
   }
 
   refreshShopCar(){
-    this.shopCart = []
+    const shopCartCache = this.storage.getFromSession(this.SHOP_CART_KEY);
+    if(!shopCartCache)
+      this.shopCart = []
+    else{
+      this.shopCart = JSON.parse(shopCartCache);
+    }
   }
 
   isInShopCard(id:number){
@@ -83,10 +90,12 @@ export class ProductComponent implements OnInit {
       let deepCopy = JSON.parse(JSON.stringify({product: product, quantity: 1}));
       this.shopCart.push(deepCopy);
     }
+    this.storage.saveToSession(this.SHOP_CART_KEY, this.shopCart);
   }
 
   addCartItemNumber(curIdx: number){
     this.shopCart[curIdx].quantity++;
+    this.storage.saveToSession(this.SHOP_CART_KEY, this.shopCart);
   }
 
   decreaseCartItemNumber(curIdx: number){
@@ -94,6 +103,7 @@ export class ProductComponent implements OnInit {
     if(this.shopCart[curIdx].quantity === 0){
       this.shopCart.splice(curIdx, 1);
     }
+    this.storage.saveToSession(this.SHOP_CART_KEY, this.shopCart);
   }
 
   addToWatchList(product: ProductDto){
@@ -127,6 +137,7 @@ export class ProductComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.shopCart = [];
+          this.storage.saveToSession(this.SHOP_CART_KEY, this.shopCart);
           this.refreshProductData();
           alert("Place order successfully!");
         },

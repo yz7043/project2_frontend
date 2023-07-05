@@ -49,4 +49,16 @@ export class StorageService {
   getJwtToken(){
     return localStorage.getItem('token');
   }
+
+  saveToSession(key: string, val: any){
+    sessionStorage.setItem(key, JSON.stringify(val));
+  }
+
+  getFromSession(key: string) {
+    return sessionStorage.getItem(key);
+  }
+
+  rmFromSession(key: string){
+    sessionStorage.removeItem(key);
+  }
 }
